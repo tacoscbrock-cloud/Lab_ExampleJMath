@@ -1,6 +1,56 @@
-public class MinMaxRoundCeilDemo {
+public class JMath {
 
-    public void run() {
+    public static int min(int a, int b) {
+        return Math.min(a, b);
+    }
+
+    public static int max(int a, int b) {
+        return Math.max(a, b);
+    }
+
+    public static double min(double a, double b) {
+        return Math.min(a, b);
+    }
+
+    public static double max(double a, double b) {
+        return Math.max(a, b);
+    }
+
+    public static long round(double x) {
+        return Math.round(x);
+    }
+
+    public static double floor(double x) {
+        return Math.floor(x);
+    }
+
+    public static double ceil(double x) {
+        return Math.ceil(x);
+    }
+
+    public static double roundTo(double x, int decimals) {
+        double p = Math.pow(10, decimals);
+        return Math.round(x * p) / p;
+    }
+
+    public static int randomInt(int min, int max) {
+        return (int)(Math.random() * (max - min + 1)) + min;
+    }
+
+    public static int clamp(int value, int min, int max) {
+        if (value < min) return min;
+        if (value > max) return max;
+        return value;
+    }
+
+    public static int clip255(int value) {
+        return clamp(value, 0, 255);
+    }
+
+    // ===================== MAIN METHOD =====================
+
+    public static void main(String[] args) {
+
         double a = 2.3;
         double b = 2.7;
 
@@ -8,39 +58,22 @@ public class MinMaxRoundCeilDemo {
         System.out.println("b = " + b);
         System.out.println();
 
-        System.out.println("Math.min(a, b) = " + Math.min(a, b));
-        System.out.println("Math.max(a, b) = " + Math.max(a, b));
+        System.out.println("min(a, b) = " + min(a, b));
+        System.out.println("max(a, b) = " + max(a, b));
         System.out.println();
 
-        System.out.println("Math.floor(a) = " + Math.floor(a)); // 2.0
-        System.out.println("Math.ceil(a)  = " + Math.ceil(a));  // 3.0
-        System.out.println("Math.round(a) = " + Math.round(a)); // 2
+        System.out.println("round(a) = " + round(a));
+        System.out.println("floor(a) = " + floor(a));
+        System.out.println("ceil(a)  = " + ceil(a));
         System.out.println();
 
-        System.out.println("Math.floor(b) = " + Math.floor(b)); // 2.0
-        System.out.println("Math.ceil(b)  = " + Math.ceil(b));  // 3.0
-        System.out.println("Math.round(b) = " + Math.round(b)); // 3
+        System.out.println("roundTo(b, 2) = " + roundTo(b, 2));
         System.out.println();
 
-        // Casting vs rounding (important confusion point)
-        System.out.println("(int)b            = " + (int)b);               // 2 (cuts off)
-        System.out.println("(int)Math.round(b)= " + (int)Math.round(b));   // 3 (nearest)
+        System.out.println("randomInt(5, 10) = " + randomInt(5, 10));
         System.out.println();
 
-        System.out.println("roundTo2Decimals(12.3456) = " + roundTo2Decimals(12.3456));
-        System.out.println("clampInt(270)             = " + clampInt(270));
-        System.out.println("clampInt(-5)              = " + clampInt(-5));
-    }
-
-    // nice extra: rounding to 2 decimals (common “marks / averages” demo)
-    private double roundTo2Decimals(double x) {
-        return Math.round(x * 100.0) / 100.0;
-    }
-
-    // nice extra: clamp into a safe range (connects to RGB clipping)
-    private int clampInt(int v) {
-        if (v < 0) return 0;
-        if (v > 255) return 255;
-        return v;
+        System.out.println("clamp(270, 0, 255) = " + clamp(270, 0, 255));
+        System.out.println("clip255(-10) = " + clip255(-10));
     }
 }
